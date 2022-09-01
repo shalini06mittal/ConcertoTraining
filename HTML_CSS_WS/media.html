@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .child{
+            background-color: bisque;
+            color: brown;
+            padding: 5px;
+            display: inline-block;
+            width: 32%;
+        }
+        .child:nth-last-child(2)
+        {
+            background-color: red;
+        } 
+        @media screen and (max-width:500px){
+            .child{
+            width: 100%;
+            margin:10px;
+        }
+        }
+        @media screen and (max-width:700px){
+            .child{
+            width: 50%;
+            margin:10px;
+        }
+        }
+    </style>
+</head>
+<body>
+    <h1>Media Queries Demo</h1>
+    <div class="parent">
+        <div class="child">
+            <h3>Child 1</h3>
+            <p>content for child 1</p>
+        </div>
+        <div class="child">
+            <h3>Child 2</h3>
+            <p>content for child 2</p>
+        </div>
+        <div class="child">
+            <h3>Child 3</h3>
+            <p>content for child 3</p>
+        </div>
+    </div>
+</body>
+</html>

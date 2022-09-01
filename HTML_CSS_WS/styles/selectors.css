@@ -1,0 +1,41 @@
+/*
+selector{
+    property:value
+}
+id #
+class .
+*/
+#head, #head1{
+    /* color: #7C3C07 ; */
+    color: rgba(7, 73, 124,0.5);
+}
+/* only  p tags with class attribute value as p1 */
+p.p1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
+.bgyellow{
+    background-color: rgba(246, 255, 0, 0.853);
+}
+.green{
+    color: rgba(0, 128, 0, 0.494);
+}
+.cur{
+    font-family: cursive;
+}
+/* combinators */
+/* descendant */
+div p{
+    color: blueviolet;
+}
+/* child */
+.inner > p{
+    font-size: 30px;
+}
+/*sibling*/
+.inner ~ p{
+    background-color: chartreuse;
+}
+div.inner1 ~ p{
+    border: 2px solid black;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            color:red;
+            font-size: 25px;
+            background-color: aqua;
+            display: inline-block;
+            padding: 10px;
+            width: 50px;
+        }
+        #info:hover #details{
+            display: block;
+        }
+        #details{
+            display: none;
+            position: absolute;
+            bottom:0;
+            background-color: black;
+            color: white;
+        }
+        #info{
+            background-color: antiquewhite;
+            color: brown;
+            padding: 20px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>Information</h1>
+        <p>In the table below, select a body font size in 
+            pixels (px) to display a complete "px to em and percent" conversion table.
+
+            <span>Tip</span>: The default font size is usually 16px.</p>
+        <div id="details">
+            <p>This will display more details</p>
+        </div>
+    </div>
+</body>
+</html>

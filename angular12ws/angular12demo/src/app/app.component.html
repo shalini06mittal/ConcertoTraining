@@ -1,0 +1,32 @@
+<app-header></app-header>
+
+<div class="container">
+  <!-- data binding : one way string interpolation-->
+  <h1 class="head text-center">{{title}}</h1>
+  <p>{{2+2}}</p>
+  <p>{{bod}}</p>
+  <p>{{display()}}</p>
+  <p innerText={{message}}></p>
+  <p [innerText]=message></p>
+  <p>{{isInValid}}</p>
+  <!-- event binding () -->
+  <input type="checkbox" [(ngModel)]="isInValid"/>
+  <!-- style binding -->
+  <p><button [disabled]=isInValid [style.color]="'red'"
+    (click)="clicked()"
+    >Check Validity</button>
+  </p>
+  <p><button [disabled]=isInValid [style.color]="red"
+    (click)="clicked()"
+    >Check Validity</button>
+  </p>
+  <p><button [disabled]=isInValid [style.color]="isInValid ? 'red' : 'green'"
+    (click)="clicked()"
+    >Check Validity</button>
+  </p>
+    <input [type]="type" [value] = 'message'/>
+    <br/><br/>
+    <!-- 2-way data binding [()] banana in a box-->
+    <input type="text" [(ngModel)] = 'message' />
+</div>
+<app-footer></app-footer>
