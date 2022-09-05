@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
+  category:string ="chicken"
   constructor() { }
 
   ngOnInit(): void {
+    console.log("category ",this.category)
   }
 
 }

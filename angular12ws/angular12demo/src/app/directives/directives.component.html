@@ -1,0 +1,10 @@
+<h1>Custom Directive</h1>
+<select [(ngModel)]="itemname">
+    <option value="masala-dosa.jpg">Masala Dosa</option>
+    <option value="Matar-Paneer.jpg">Matar Paneer</option>
+    <option value="sambhar-vada.jpg">Sambhar Vada</option>
+    <option value="vegetable-curry.jpeg">Vegetable Curry</option>
+</select>
+<img src="../../assets/masala-dosa.jpg" appHover [itemname]="itemname"
+width="400" height="400"/>
+<p appHover>para </p>

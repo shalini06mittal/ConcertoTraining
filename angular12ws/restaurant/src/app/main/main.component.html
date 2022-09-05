@@ -1,3 +1,21 @@
 <div class="container mt-5">
-<app-productlist></app-productlist>
+
+    <div class="row">
+        <div class="col-md-3">
+            <select class="form-select mb-3 " [(ngModel)]="category" name="category">
+                <option value="biryani">Biryani</option>
+                <option value="chicken">Chicken</option>
+                <option value="chinese">Chinese</option>
+                <option value="south indian">South Indian</option>
+                <option value="paneer">Paneer</option>
+                <option value="vegetable">Vegetable</option>
+            </select>
+        </div>
+        <div class="col-md-7"></div>
+            <div class="col-md-2">
+                <i class="fa fa-cart-plus" id="cart-plus"> 0 Items</i>
+            </div>
+        </div>
+
+    <app-productlist [category]="category"></app-productlist>
 </div>

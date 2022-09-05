@@ -8,6 +8,10 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { ParentComponent } from './lifecycle/parent.component';
+import { ChildComponent } from './lifecycle/child.component';
+import { DirectivesComponent } from './directives/directives.component';
+import { HoverDirective } from './directives/hover.directive';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,11 @@ import { EmployeesComponent } from './employees/employees.component';
     HeaderComponent,
     FooterComponent,
     EmployeeComponent,
-    EmployeesComponent
+    EmployeesComponent,
+    ParentComponent,
+    ChildComponent,
+    DirectivesComponent,
+    HoverDirective
   ],
   imports: [
     BrowserModule,

@@ -1,19 +1,23 @@
-<app-header></app-header>
-<app-employees></app-employees>
-<app-employee></app-employee>
 <div class="container">
+<app-directives></app-directives>
+<!-- <app-header></app-header> -->
+<!-- <app-parent></app-parent> -->
+<!-- <app-employees></app-employees>
+<app-employee></app-employee> -->
+
+</div>
   <!-- data binding : one way string interpolation-->
-  <h1 class="head text-center">{{title}}</h1>
+  <!-- <h1 class="head text-center">{{title}}</h1>
   <p>{{2+2}}</p>
   <p>{{bod}}</p>
   <p>{{display()}}</p>
   <p innerText={{message}}></p>
   <p [innerText]=message></p>
-  <p>{{isInValid}}</p>
+  <p>{{isInValid}}</p> -->
   <!-- event binding () -->
-  <input type="checkbox" [(ngModel)]="isInValid"/>
+  <!-- <input type="checkbox" [(ngModel)]="isInValid"/> -->
   <!-- style binding -->
-  <p><button [disabled]=isInValid [style.color]="'red'"
+  <!-- <p><button [disabled]=isInValid [style.color]="'red'"
     (click)="clicked()"
     >Check Validity</button>
   </p>
@@ -26,8 +30,8 @@
     >Check Validity</button>
   </p>
     <input [type]="type" [value] = 'message'/>
-    <br/><br/>
+    <br/><br/> -->
     <!-- 2-way data binding [()] banana in a box-->
-    <input type="text" [(ngModel)] = 'message' />
-</div>
-<app-footer></app-footer>
+    <!-- <input type="text" [(ngModel)] = 'message' />
+
+<app-footer></app-footer> -->
