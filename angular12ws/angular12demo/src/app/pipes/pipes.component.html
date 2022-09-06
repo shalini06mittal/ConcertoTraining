@@ -1,0 +1,15 @@
+<p>pipes works!</p>
+<p ngNonBindable>{{ 20 | power}}</p>
+<p>20<sup>4</sup> : {{ 20 | power:5}}</p>
+<p ngNonBindable>{{ 3.14659265 | number: '3.1-2' }}</p> 
+<p>{{ 3.14659265 | number: '3.1-2' }}</p> 
+<p ngNonBindable>{{ 3.14159265 | number: '3.1-2' :'fr'}}</p> 
+ <p>{{ 3.14159265 | number: '3.1-2' :'fr'}}</p> 
+ <p>{{ 1234.56 | currency:'GBP':false }}</p>
+<p>{{ 1234.56 | currency:"GBP":true }}</p>
+<p>{{locale}}</p>
+<p>{{bdate }}</p>
+<p>{{bdate | date:'short'}}</p>
+<p>{{bdate | date:'long'}}</p>
+<p>{{bdate | date:'medium'}}</p>
+

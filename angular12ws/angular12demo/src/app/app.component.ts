@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Employee } from './directives/demo';
 
 @Component({
   selector: 'app-root',
@@ -22,5 +23,8 @@ export class AppComponent {
   clicked()
   {
     alert('i was clicked')
+  }
+  newEmpAdded(newemp:any){
+    console.log(newemp)
   }
 }

@@ -12,6 +12,13 @@ import { ParentComponent } from './lifecycle/parent.component';
 import { ChildComponent } from './lifecycle/child.component';
 import { DirectivesComponent } from './directives/directives.component';
 import { HoverDirective } from './directives/hover.directive';
+import { PipesComponent } from './pipes/pipes.component';
+import { PowerPipe } from './pipes/power.pipe';
+import { registerLocaleData } from '@angular/common'; 
+import localeFr from '@angular/common/locales/fr';
+import { EmpformComponent } from './empform/empform.component'; 
+// the second parameter 'fr' is optional 
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -23,7 +30,10 @@ import { HoverDirective } from './directives/hover.directive';
     ParentComponent,
     ChildComponent,
     DirectivesComponent,
-    HoverDirective
+    HoverDirective,
+    PipesComponent,
+    PowerPipe,
+    EmpformComponent
   ],
   imports: [
     BrowserModule,
