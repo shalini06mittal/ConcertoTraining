@@ -10,11 +10,13 @@ export class EmpformComponent {
 
   @Output()
   empadded:EventEmitter<Employee> = new EventEmitter();
-  saveEmployee(emp:Employee)
+  saveEmployee(emp:any)
   {
     //alert('yes')
-    console.log(emp)
-    this.empadded.emit(emp)
+    console.log(emp.value)
+    this.empadded.emit(emp.value)
+   // emp={eid:0, ename:'',email:'',phone:'', address:{city:"", country:"", zipcode:0}}
+    emp.reset();
   }
 
 }

@@ -1,11 +1,11 @@
 <h1>Add Employee</h1>
 <!-- ngModel , ngForm => we have FormsModule in app.module.ts-->
 <!-- template reference variable > local to the tmeplate-->
-<p>{{empform.value | json}}</p>
-<form #empform="ngForm" (submit)="saveEmployee(empform.value)">
+<!-- <p>{{empform.value | json}}</p> -->
+<form #empform="ngForm" (submit)="saveEmployee(empform)">
     <div class="mb-3">
         <input type="text" class="form-control" [class.is-invalid]="eid.invalid && eid.touched" required
-            placeholder="enter id" #eid="ngModel" ngModel name="eid" />
+            placeholder="enter id" #eid="ngModel" ngModel name="eid"/>
         <!-- <span>{{ename.className}}</span> -->
         <div *ngIf="eid.touched">
             <div *ngIf="eid.errors && (eid.invalid)">

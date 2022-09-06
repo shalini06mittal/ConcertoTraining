@@ -24,7 +24,9 @@ export class AppComponent {
   {
     alert('i was clicked')
   }
+  newemp:any;
   newEmpAdded(newemp:any){
     console.log(newemp)
+    this.newemp = newemp;
   }
 }

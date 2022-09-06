@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Employee } from '../model/employee';
 
 @Component({
@@ -6,10 +6,12 @@ import { Employee } from '../model/employee';
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.css'],
 })
-export class EmployeesComponent implements OnInit {
+export class EmployeesComponent implements OnInit, OnChanges {
 
   nos:number[] = []
   employees:any[]=[]
+  @Input()
+  newemp:any={}
   people: any[] = [
     {
     "name": "Douglas Pace",
@@ -43,6 +45,11 @@ export class EmployeesComponent implements OnInit {
     {eid:3,ename:'shalini789',
     email:'shalini@gmail.com',phone:'1321312312'
     , address:{country:'India'}}]
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.newemp)
+    if(this.newemp !== undefined)
+    this.employees.push(this.newemp)
   }
 
   ngOnInit(): void {
