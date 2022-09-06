@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Employee } from './directives/demo';
+
 
 @Component({
   selector: 'app-root',

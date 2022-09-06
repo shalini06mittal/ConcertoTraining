@@ -19,7 +19,8 @@ import localeFr from '@angular/common/locales/fr';
 import { EmpformComponent } from './empform/empform.component'; 
 // the second parameter 'fr' is optional 
 registerLocaleData(localeFr, 'fr');
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EmpeditformComponent } from './empeditform/empeditform.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,11 +34,12 @@ registerLocaleData(localeFr, 'fr');
     HoverDirective,
     PipesComponent,
     PowerPipe,
-    EmpformComponent
+    EmpformComponent,
+    EmpeditformComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, FormsModule
+    AppRoutingModule, FormsModule,  BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

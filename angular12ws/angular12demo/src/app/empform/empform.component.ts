@@ -1,15 +1,25 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Employee } from '../model/employee';
+
 
 @Component({
   selector: 'app-empform',
   templateUrl: './empform.component.html',
   styleUrls: ['./empform.component.css']
 })
-export class EmpformComponent {
+export class EmpformComponent implements OnInit{
 
   @Output()
   empadded:EventEmitter<Employee> = new EventEmitter();
+  title:string;
+  constructor(){
+    
+    this.title=''
+  }
+  ngOnInit(): void {
+    
+      this.title="Add Employee"
+  }
   saveEmployee(emp:any)
   {
     //alert('yes')
