@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoService } from './service/demo.service';
 
 
 @Component({
@@ -16,6 +17,9 @@ export class AppComponent {
   message:string = 'some message..'
   type = 'text'
   red = 'red';
+
+  constructor(public service:DemoService){}
+
   display()
   {
     return "some text";
@@ -28,5 +32,25 @@ export class AppComponent {
   newEmpAdded(newemp:any){
     console.log(newemp)
     this.newemp = newemp;
+  }
+
+  getTodos()
+  {
+    console.log('getting all todos')
+    this.service.getAllTodos().subscribe(data=>console.log(data));
+  }
+  getTodoById(id:any){
+
+  }
+  postTodo()
+  {
+
+  }
+  deleteTodo(){
+
+  }
+  updateTodo()
+  {
+
   }
 }

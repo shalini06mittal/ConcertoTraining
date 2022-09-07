@@ -4,7 +4,7 @@
 <!-- <p>{{empform.value | json}}</p> -->
 <form #empform="ngForm" (submit)="saveEmployee(empform)">
     <div class="mb-3">
-        <input type="text" class="form-control" [class.is-invalid]="eid.invalid && eid.touched" required
+        <input type="text" class="form-control" [class.errborder]="eid.invalid && eid.touched" required
             placeholder="enter id" #eid="ngModel" ngModel name="eid"/>
         <!-- <span>{{ename.className}}</span> -->
         <div *ngIf="eid.touched">

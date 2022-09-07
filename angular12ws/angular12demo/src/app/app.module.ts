@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +21,10 @@ import { EmpformComponent } from './empform/empform.component';
 registerLocaleData(localeFr, 'fr');
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmpeditformComponent } from './empeditform/empeditform.component';
+import { EmpreactiveformComponent } from './empreactiveform/empreactiveform.component';
+import { ServComponent } from './service/serv.component';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,11 +39,14 @@ import { EmpeditformComponent } from './empeditform/empeditform.component';
     PipesComponent,
     PowerPipe,
     EmpformComponent,
-    EmpeditformComponent
+    EmpeditformComponent,
+    EmpreactiveformComponent,
+    ServComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule, FormsModule,  BrowserAnimationsModule
+    BrowserModule, ReactiveFormsModule,
+    AppRoutingModule, FormsModule,  BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

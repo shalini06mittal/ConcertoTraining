@@ -1,12 +1,24 @@
 <div class="container">
-  <app-empform (empadded)="newEmpAdded($event)"></app-empform>
-  <app-employees [newemp]="newemp"></app-employees>
+  <h1>App Component</h1>
+<p>{{service.message}}</p>
+  <app-serv></app-serv>
+
+  <div>
+    <button (click)="getTodos()">Get All todos</button>
+    <button (click)="getTodoById(1)">Get Todo</button>
+    <button (click)="postTodo()">Post todos</button>
+    <button (click)="deleteTodo()">Delete todos</button>
+    <button (click)="updateTodo()">Update todos</button>
+  </div>
+  <!-- <app-empreactiveform></app-empreactiveform> -->
+  <!-- <app-empform (empadded)="newEmpAdded($event)"></app-empform>
+  <app-employees [newemp]="newemp"></app-employees> -->
   <!-- <app-pipes></app-pipes> -->
 <!-- <app-directives></app-directives> -->
 <!-- <app-header></app-header> -->
 <!-- <app-parent></app-parent> -->
-<!-- 
-<app-employee></app-employee> -->
+
+<!-- <app-employee></app-employee>  -->
 
 </div>
   <!-- data binding : one way string interpolation-->

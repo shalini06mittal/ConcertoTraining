@@ -1,0 +1,43 @@
+<h1>Reactive Forms</h1>
+<h3>{{empform.value | json}}</h3>
+<h3>{{empform.status }}</h3>
+<form [formGroup]="empform">
+    <div class="mb-3">
+        <input type="text" class="form-control" [ngClass]="{'is-invalid':empform.controls.ename.invalid}"
+        formControlName="ename" placeholder="Enter name"/>
+        <div *ngIf="empform.controls.ename.invalid && empform.controls.ename.errors?.required">
+            <span class="text-danger">It is required</span>
+        </div>
+        <div *ngIf="empform.controls.ename.errors?.minlength">
+            <span class="text-danger">length 5</span>
+        </div>
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control"
+        formControlName="email" placeholder="Enter email"/>
+        <div *ngIf="email.invalid && email.errors?.required">
+            <span class="text-danger">It is required</span>
+        </div>
+    </div>
+    <div class="mb-3">
+        <input type="text" class="form-control"
+        formControlName="password" placeholder="Enter password"/>
+        <div *ngIf="password.invalid && password.errors?.needsExclamation">
+            <span class="text-danger">! is required</span>
+        </div>
+    </div>
+    <div [formGroup]="address">
+        <div class="mb-3">
+            <input type="text" class="form-control"
+            formControlName="city" placeholder="Enter city"/>
+            <div *ngIf="city.invalid && city.errors?.required">
+                <span class="text-danger">It is required</span>
+            </div>
+        </div>
+    </div>
+   
+</form>
+<input type="text" class="form-control" 
+[formControl]="subsemail"
+placeholder="enter email to subscribe">
+<button (click)="subscribe()">Subscribe</button>
