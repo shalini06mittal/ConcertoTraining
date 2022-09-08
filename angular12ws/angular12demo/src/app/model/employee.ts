@@ -3,6 +3,7 @@ export interface Employee{
     ename:string,
     email:string,
     phone:string,
+    password?:string,
     address:{
         city?:string,
         country:string,

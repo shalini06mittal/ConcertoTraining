@@ -1,3 +1,15 @@
 {
-    "employees":[{"eid":1,"ename":"Shalini"}]
+    "employees":[
+        {"eid":1,"ename":"shalini","password":"shalini",
+        "email":"shalini@gmail.com","phone":"1321312312",
+        "address":{"country":"India","city":"Delhi","zipcode":787878},"id":1},
+
+        {"eid":2,"ename":"shalini123","password":"shalini123",
+        "email":"shalini@gmail.com","phone":"1321312312",
+         "address":{"country":"India","city":"Delhi", "zipcode":909090},"id":2},
+
+         {"eid":3,"ename":"shalini123","password":"shalini123",
+        "email":"shalini@gmail.com","phone":"1321312312",
+         "address":{"country":"India","city":"Delhi", "zipcode":909090},"id":3}
+    ]
 }
