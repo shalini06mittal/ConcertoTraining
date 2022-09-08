@@ -28,6 +28,7 @@ import { LoginComponent } from './login/login.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
+import { ObservablesComponent } from './observables/observables.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {MatInputModule} from '@angular/material/input';
     EmpeditformComponent,
     EmpreactiveformComponent,
     ServComponent,
-    LoginComponent
+    LoginComponent,
+    ObservablesComponent
   ],
   imports: [
     BrowserModule, ReactiveFormsModule,

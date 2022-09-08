@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Employee } from '../model/employee';
 import { trigger, style, animate, transition , state} from '@angular/animations';
+import { EmphttpService } from '../service/emphttp.service';
+
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
@@ -35,7 +37,7 @@ import { trigger, style, animate, transition , state} from '@angular/animations'
     ])
   ],
 })
-export class EmployeesComponent implements  OnChanges {
+export class EmployeesComponent implements  OnChanges, OnInit {
 
   nos:number[] = []
   employees:Employee[]=[]
@@ -66,18 +68,22 @@ export class EmployeesComponent implements  OnChanges {
     }
     ];
     
-  constructor() { 
-    this.employees=[{eid:1,ename:'shalini',
-    email:'shalini@gmail.com',phone:'1321312312'
-    , address:{country:'India'}},
-    {eid:2,ename:'shalini123',
-    email:'shalini@gmail.com',phone:'1321312312'
-    , address:{country:'India'}},
-    {eid:3,ename:'shalini789',
-    email:'shalini@gmail.com',phone:'1321312312'
-    , address:{country:'India'}}]
+  constructor(private empservice:EmphttpService) { 
+    // this.employees=[{eid:1,ename:'shalini',
+    // email:'shalini@gmail.com',phone:'1321312312'
+    // , address:{country:'India'}},
+    // {eid:2,ename:'shalini123',
+    // email:'shalini@gmail.com',phone:'1321312312'
+    // , address:{country:'India'}},
+    // {eid:3,ename:'shalini789',
+    // email:'shalini@gmail.com',phone:'1321312312'
+    // , address:{country:'India'}}]
     this.employee = null; //{eid:10, ename:'ss',email:'',phone:'', address:{city:"", country:"", zipcode:0}};
 
+  }
+  ngOnInit(): void {
+    this.empservice.getAllEmployees()
+    .subscribe(data => this.employees = data)
   }
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.newemp)

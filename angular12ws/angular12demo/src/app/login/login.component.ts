@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -8,10 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   public loginValid = true;
-  public username = 'Deepak@gmail.com';
-  public password = 'dep@123!';
+  public username = 'abc';
+  public password = 'abc123!';
 
-  constructor() { }
+  constructor(private userserv : UserService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -21,15 +23,18 @@ export class LoginComponent implements OnInit {
    */
   public onSubmit(): void {
     this.loginValid = true;
-    // if(this.hs.loginUser(this.username, this.password))
-    // {
-    //   localStorage.setItem('email', this.username);
-    //   localStorage.setItem('token','JWT:12345678910');
-      
-    // }
-    // else{
-    //   this.loginValid = false;
-    // }
+    this.userserv.loginUser(this.username, this.password)
+    .subscribe(resp => {
+      console.log(resp[0])
+      if(resp[0].username === this.username && resp[0].password === this.password)
+      {
+        localStorage.setItem("username",this.username);
+        this.router.navigate(['/list']);
+      }
+      else{
+        this.loginValid = false;
+      }
+    })
   }
 
 }
