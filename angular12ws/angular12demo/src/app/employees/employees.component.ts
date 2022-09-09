@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Employee } from '../model/employee';
 import { trigger, style, animate, transition , state} from '@angular/animations';
 import { EmphttpService } from '../service/emphttp.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-employees',
@@ -45,6 +46,7 @@ export class EmployeesComponent implements  OnChanges, OnInit {
   newemp:any={}
   isEdit:boolean = true;
   employee:Employee | null;
+  selid:number = 0;
   people: any[] = [
     {
     "name": "Douglas Pace",
@@ -68,7 +70,9 @@ export class EmployeesComponent implements  OnChanges, OnInit {
     }
     ];
     
-  constructor(private empservice:EmphttpService) { 
+  constructor(private empservice:EmphttpService,
+    private router:Router, 
+    private route:ActivatedRoute) { 
     // this.employees=[{eid:1,ename:'shalini',
     // email:'shalini@gmail.com',phone:'1321312312'
     // , address:{country:'India'}},
@@ -81,7 +85,20 @@ export class EmployeesComponent implements  OnChanges, OnInit {
     this.employee = null; //{eid:10, ename:'ss',email:'',phone:'', address:{city:"", country:"", zipcode:0}};
 
   }
+  view(id:number)
+  {
+
+    this.router.navigate([id],
+      {relativeTo:this.route})
+  }
+ 
+  isSelected(empid:number):boolean{
+    console.log(empid === this.selid)
+    return empid === this.selid;
+  }
   ngOnInit(): void {
+    //this.route.params.subscribe(params => this.selid = params.id)
+    this.route.queryParams.subscribe(params => this.selid = parseInt(params.id))
     this.empservice.getAllEmployees()
     .subscribe(data => this.employees = data)
   }
@@ -111,9 +128,7 @@ export class EmployeesComponent implements  OnChanges, OnInit {
       this.employees[objindx] = emp;
       }
       this.isEdit = !this.isEdit  
- 
-      
   }
 
-
+ 
 }

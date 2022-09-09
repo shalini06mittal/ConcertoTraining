@@ -6,13 +6,13 @@
     <ng-template class="container" #none>
         <h1>No items to display</h1>
     </ng-template > -->
-
-    <div class="container" *ngIf="employees.length > 0">
+    {{selid}}
+    <div *ngIf="employees.length > 0">
         <div *ngFor="let emp of employees" [@simpleFadeAnimation]="'in'">
-        
-            <app-employee [employee]="emp" class="emp" >
+            <app-employee [employee]="emp">
                 <button (click)="delete(emp)">Delete</button>
                 <button (click)="edit(emp)">Edit</button>
+                <button (click)="view(emp.eid)" [class.border]="isSelected(emp.eid)">View Profile</button>
             </app-employee> 
         </div>
     </div>

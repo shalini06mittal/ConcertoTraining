@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   public loginValid = true;
   public username = 'abc';
-  public password = 'abc123!';
+  public password = 'abc123';
 
   constructor(private userserv : UserService, private router:Router) { }
 
@@ -26,10 +26,10 @@ export class LoginComponent implements OnInit {
     this.userserv.loginUser(this.username, this.password)
     .subscribe(resp => {
       console.log(resp[0])
-      if(resp[0].username === this.username && resp[0].password === this.password)
+      if(resp[0] !== undefined && resp[0].username === this.username && resp[0].password === this.password)
       {
         localStorage.setItem("username",this.username);
-        this.router.navigate(['/list']);
+        this.router.navigate(['/employees']);
       }
       else{
         this.loginValid = false;

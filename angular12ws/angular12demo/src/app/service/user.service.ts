@@ -13,4 +13,11 @@ export class UserService {
   loginUser(username:string, password:string){
       return this.http.get<any[]>(this.url+username);
   }
+
+  isAuthencticated():boolean{
+    return !!localStorage.getItem("username");
+  }
+  logout(){
+    localStorage.removeItem("username");
+  } 
 }

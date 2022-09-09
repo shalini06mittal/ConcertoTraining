@@ -23,12 +23,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmpeditformComponent } from './empeditform/empeditform.component';
 import { EmpreactiveformComponent } from './empreactiveform/empreactiveform.component';
 import { ServComponent } from './service/serv.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import { ObservablesComponent } from './observables/observables.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileinfoComponent } from './profileinfo/profileinfo.component';
+import { TokenService } from './service/token.service';
 
 @NgModule({
   declarations: [
@@ -48,14 +51,20 @@ import { ObservablesComponent } from './observables/observables.component';
     EmpreactiveformComponent,
     ServComponent,
     LoginComponent,
-    ObservablesComponent
+    ObservablesComponent,
+    ProfileComponent,
+    ProfileinfoComponent
   ],
   imports: [
     BrowserModule, ReactiveFormsModule,
     AppRoutingModule, FormsModule,  BrowserAnimationsModule,
     HttpClientModule, MatButtonModule, MatCardModule,MatInputModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass : TokenService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
