@@ -1,8 +1,10 @@
+import { registerLocaleData } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmpformComponent } from './empform/empform.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { LoginComponent } from './login/login.component';
+import { PipesComponent } from './pipes/pipes.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileinfoComponent } from './profileinfo/profileinfo.component';
 import { AuthService } from './service/auth.service';
@@ -18,7 +20,11 @@ const routes: Routes = [
     children:[
       {path:'info', component:ProfileinfoComponent}
     ]},
-  {path:'register', component:EmpformComponent},
+  //  {path:'register', component:EmpformComponent}
+  {path:'register', loadChildren:()=> import('./lazy-loading/lazy-loading.module')
+                                      .then(m=> m.LazyLoadingModule)
+  }
+
   
 ];
 

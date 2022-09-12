@@ -15,7 +15,7 @@ export class EmpformComponent implements OnInit{
   empadded:EventEmitter<Employee> = new EventEmitter();
   title:string;
   constructor(private empservice:EmphttpService, private router:Router){
-    
+    console.log('emp form constructor')
     this.title=''
   }
   ngOnInit(): void {
