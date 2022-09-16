@@ -1,0 +1,3 @@
+module calc {
+	requires math;
+}
