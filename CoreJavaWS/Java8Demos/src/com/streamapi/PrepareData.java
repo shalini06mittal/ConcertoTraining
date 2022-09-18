@@ -38,8 +38,8 @@ public class PrepareData {
 	        Temperature t = new Temperature(
 	                             d,
 	                             new BigDecimal(
-	                                     RANDOM.nextDouble())
-	                             .setScale(4, RoundingMode.CEILING)
+	                                     RANDOM.nextDouble() *100)
+	                             .setScale(0, RoundingMode.CEILING)
 	                             
 	                         );
 	        temps.add(t);
