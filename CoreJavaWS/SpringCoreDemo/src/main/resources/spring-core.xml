@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+       <!--  every class is called as a bean  
+       Book book1 = new Book();
+       
+       constructor 
+       --> 
+       <bean  id="book1" class="com.concerto.demos.SpringCoreDemo.entity.Book">
+       		<constructor-arg name="bookid" value="101"></constructor-arg>
+       		<constructor-arg name="title" value="Core Java"></constructor-arg>
+       		<constructor-arg name="price" value="345.90"></constructor-arg>
+       </bean>
+        <bean  id="book3" class="com.concerto.demos.SpringCoreDemo.entity.Book">
+       		<constructor-arg name="bookid" value="101"></constructor-arg>
+       		<constructor-arg name="title" value="Core Java"></constructor-arg>
+       		<constructor-arg name="price" value="345.90"></constructor-arg>
+       		<constructor-arg name="author" ref="a1"></constructor-arg>
+       </bean>
+       <!--  setter injection -->
+       <bean  id="book2"  scope="prototype"
+       class="com.concerto.demos.SpringCoreDemo.entity.Book">
+       		<property name="bookid" value="102"></property>
+       		<property name="title" value="Midnight"></property>
+       		<property name="price" value="1345.90"></property>
+       </bean>
+       
+       <bean id="a1" class="com.concerto.demos.SpringCoreDemo.entity.Author">
+       		<constructor-arg name="aid" value="101"></constructor-arg>
+       		<constructor-arg name="name" value="Cay Hortsmann"></constructor-arg>
+       		<constructor-arg name="genre" value="IT"></constructor-arg>
+       </bean>
+       
+</beans>

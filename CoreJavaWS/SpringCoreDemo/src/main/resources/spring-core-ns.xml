@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+       <bean  id="book1" class="com.concerto.demos.SpringCoreDemo.entity.Book"
+       p:bookid="1" p:title="harry Potter and Soccerrers Stone"
+       p:price="789.90" p:author-ref="a1"
+       ></bean>
+       
+       <bean  id="book2" lazy-init="true" 
+       class="com.concerto.demos.SpringCoreDemo.entity.Book"
+       c:bookid="2" c:title="HTML5"
+       c:price="543.78" c:author-ref="a1"
+       ></bean>
+       
+        <bean id="a1" class="com.concerto.demos.SpringCoreDemo.entity.Author">
+       		<constructor-arg name="aid" value="101"></constructor-arg>
+       		<constructor-arg name="name" value="Cay Hortsmann"></constructor-arg>
+       		<constructor-arg name="genre" value="IT"></constructor-arg>
+       </bean>
+        
+       
+</beans>
