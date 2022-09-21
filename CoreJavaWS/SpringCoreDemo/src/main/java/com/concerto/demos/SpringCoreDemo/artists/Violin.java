@@ -2,7 +2,7 @@ package com.concerto.demos.SpringCoreDemo.artists;
 
 import org.springframework.stereotype.Component;
 
-@Component("violin")
+//@Component("v1")
 public class Violin implements Instrument{
 
 	@Override

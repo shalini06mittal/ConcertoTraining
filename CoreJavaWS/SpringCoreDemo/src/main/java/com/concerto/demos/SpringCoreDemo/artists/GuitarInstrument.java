@@ -2,8 +2,8 @@ package com.concerto.demos.SpringCoreDemo.artists;
 
 import org.springframework.stereotype.Component;
 // spring managed bean
-@Component("guitar")
-public class Guitar implements Instrument{
+//@Component("g1")
+public class GuitarInstrument implements Instrument{
 
 	@Override
 	public void play() {

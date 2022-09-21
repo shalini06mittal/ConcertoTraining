@@ -12,6 +12,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.concerto.demos.SpringCoreDemo.entity.Author;
@@ -20,37 +21,43 @@ import com.concerto.demos.SpringCoreDemo.entity.CollDemo;
 
 // spring.xml file
 @Configuration
-@ComponentScan
+@ComponentScan//("dummy")
 public class AppAnnoConfig 
 {
     public static void main( String[] args )
     {
        
-        ApplicationContext context = 
+        AbstractApplicationContext context = 
         		new AnnotationConfigApplicationContext(AppAnnoConfig.class);
-        CollDemo cd1 = context.getBean(CollDemo.class);
-        System.out.println(cd1.getFruits());
-        System.out.println(cd1.getCertificates());
-        System.out.println(cd1.getMap());
-        System.out.println(cd1.getAuthors());
+        System.out.println();
+        for(String bean:context.getBeanDefinitionNames())
+        	System.out.println(bean);
+//        CollDemo cd1 = context.getBean(CollDemo.class);
+//        System.out.println(cd1.getFruits());
+//        System.out.println(cd1.getCertificates());
+//        System.out.println(cd1.getMap());
+//        System.out.println(cd1.getAuthors());
         
         //        Book b1 = context.getBean(Book.class);
 //        System.out.println(b1);
+        System.out.println();
+        context.registerShutdownHook();
         
     }
-    @Bean
+   // @Bean
+    
     public List<String> getFruits()
     {
     	System.out.println("get fruits called");
     	return Arrays.asList("Oranges","Apples","Grapes");
     }
-    @Bean
+  //  @Bean
     public Set<String> getCertificates()
     {
     	return new HashSet<>(
     			Arrays.asList("OCJP","CCNA"));
     }
-    @Bean
+  //  @Bean
     public Map<String, Integer> getMap()
     {
     	Map<String, Integer> map = new HashMap<>();
@@ -59,7 +66,7 @@ public class AppAnnoConfig
     	map.put("E3", 12);
     	return map;
     }
-    @Bean("list")
+  //  @Bean("list")
     public List<Author> getAuthors()
     {
     	return Arrays.asList(

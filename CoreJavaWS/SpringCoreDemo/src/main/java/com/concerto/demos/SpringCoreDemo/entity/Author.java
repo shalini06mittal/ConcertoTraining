@@ -3,7 +3,7 @@ package com.concerto.demos.SpringCoreDemo.entity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Author {
 	
 	@Value("1")
@@ -14,7 +14,7 @@ public class Author {
 	private String genre;
 	
 	public Author() {
-		// TODO Auto-generated constructor stub
+		System.out.println("Author const");
 	}
 
 
