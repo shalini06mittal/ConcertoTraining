@@ -22,6 +22,9 @@ public class DashboardController {
 	@GetMapping("/dashboard")
 	public  String dashboard(Map<String, List<TransactionDetails>> map,HttpSession session) {
 		String email = (String)session.getAttribute("email");
+		if(email==null) {
+			return "redirect:login";
+		}
 		List<TransactionDetails> tran=trans.getAllTransactions(email);
 		map.put("tr", tran);
 		return "dashboard";

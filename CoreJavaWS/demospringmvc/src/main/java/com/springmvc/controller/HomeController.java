@@ -2,6 +2,9 @@ package com.springmvc.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,25 @@ public class HomeController {
 	public String registerUser(){
 		System.out.println("register");
 		return "register";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session, HttpServletRequest req,
+			HttpServletResponse resp){
+		System.out.println("logout");
+		session.removeAttribute("email");
+		session.invalidate();
+		Cookie cookies[] = req.getCookies();
+		for(Cookie cookie:cookies)
+		{
+			if(cookie.getName().equals("JSESSIONID"))
+			{
+				cookie.setMaxAge(0);
+				resp.addCookie(cookie);
+				break;
+			}
+		}
+ 		return "redirect:login";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/login")

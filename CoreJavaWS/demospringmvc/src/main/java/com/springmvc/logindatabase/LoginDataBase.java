@@ -15,10 +15,13 @@ public class LoginDataBase {
 	public boolean validateUser(LoginUser user) {
 		
 		String sql = "select password from loginuser where email=?";
-		String password = template.queryForObject(sql, String.class,user.getEmail());
-		if(password!=null&&password.equals(user.getPassword())) {
-			return true;
+		try{
+			String password = template.queryForObject(sql, String.class,user.getEmail());
+			if(password!=null&&password.equals(user.getPassword())) {
+				return true;
+			}
 		}
+		catch(Exception e) {return false;}
 		return false;
 	}
 	
