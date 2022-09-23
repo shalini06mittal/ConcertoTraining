@@ -1,5 +1,7 @@
 package com.springmvc.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/login")
-	public String loginUser(){
+	public String loginUser(@RequestParam(required=false) String errormsg ,Map<String, String> map){
+		if(errormsg!=null) 
+			map.put("errormsg", errormsg);
 		System.out.println("login");
 		return "login";
 	}
@@ -48,14 +52,14 @@ public class HomeController {
 	
 	
 	@PostMapping("/login")
-	public String validateUser(LoginUser user){
+	public String validateUser(LoginUser user,Map<String, String> map){
 		System.out.println("login post");
 		System.out.println(user);
 		if(loginDatabase.validateUser(user)) {
 			return "dashboard";
 		}
-		
-		return "login";
+		map.put("email", user.getEmail());
+		return "redirect:login?errormsg= Invalid User";
 	}
 //	@PostMapping("/login")
 //	public String validateUser(@RequestParam String email,

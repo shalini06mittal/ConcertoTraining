@@ -8,5 +8,8 @@
 </head>
 <body>
 <h1>Dashboard</h1>
+<%
+String email=(String)request.getAttribute("email");
+%><h1>Welcome<%=email %></h1>
 </body>
 </html>
