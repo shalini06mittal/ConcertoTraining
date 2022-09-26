@@ -6,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-
 import com.boot.demo.SpringBootDemo.entity.Customer;
 import com.boot.demo.SpringBootDemo.entity.Product;
 import com.boot.demo.SpringBootDemo.repository.CustomerDatabase;
@@ -54,3 +53,4 @@ public class SpringBootDemoApplication {
 	}
 
 }
+
