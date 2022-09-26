@@ -22,8 +22,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Product implements Serializable{
+@Entity
 
+public class Product implements Serializable{
+	@Id
 	private String pid;
 	private String pname;
 	private double price;

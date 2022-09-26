@@ -7,8 +7,10 @@ import javax.persistence.AssociationOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,11 +23,14 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Entity
 public class LineItem {
-	
+	@Id
 	private int id;
 	private int qty;
+	@OneToOne
 	private Product product;
+	@OneToOne
 	private Order order;
 	
 }
