@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.boot.demo.SpringBootDemo.entity.CartItems;
@@ -41,20 +42,22 @@ public class OrderService {
 		List<LineItem> items = new ArrayList<>();
 		for(CartItems cartitem : cartItems)
 		{
+	
 			LineItem item = new LineItem();
 			item.setOrder(savedOrder);
 			item.setProduct(cartitem.getProduct());
 			item.setQty(cartitem.getQuantity());
+			this.lineItemRepository.save(item);
 			items.add(item);
 		}
 		order.setLineitems(items);
 		double total = order.calculate();
-		
-		order.setTotal(total);
+		this.orderRepository.updateTotal(total, savedOrder.getOrderid());
+		//order.setTotal(total);
 		
 		return savedOrder.getOrderid();
 	}
-	@Transactional
+	@Transactional	
 	public List<Order> getOrders(String email)
 	{
 		ArrayList<Order> ol=new ArrayList<Order>();
