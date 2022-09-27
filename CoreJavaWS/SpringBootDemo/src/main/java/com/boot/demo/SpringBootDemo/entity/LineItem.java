@@ -7,6 +7,8 @@ import javax.persistence.AssociationOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,15 +24,22 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 public class LineItem {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int qty;
 	@OneToOne
+	@JoinColumn(name="prodid", referencedColumnName = "pid")
 	private Product product;
 	@OneToOne
+	@JoinColumn(name="orderid")
 	private Order order;
+//	@Override
+//	public String toString() {
+//		return "LineItem [qty=" + qty + ", product=" + product + "]";
+//	}
+	
 	
 }

@@ -25,7 +25,7 @@ public class CustomerController {
 	{
 		
 		System.out.println("add customer");
-		this.service.saveOrUpdate(customer);
+		this.service.save(customer);
 		return "redirect:/customers";
 	}
 	//@RequestMapping("/{email}")

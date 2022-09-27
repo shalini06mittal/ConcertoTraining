@@ -30,7 +30,7 @@ public class ProductController {
 	public String addProduct(Product product)
 	{
 		System.out.println("add product");
-		this.service.saveOrUpdate(product);
+		this.service.save(product);
 		return "redirect:/products";
 	}
 //	//@GetMapping("/purchase")

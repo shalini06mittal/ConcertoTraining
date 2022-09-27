@@ -24,10 +24,10 @@ public class Customer {
 	@Id
 	@Column(length = 100)
 	private String email;
+	@Column(name="name", nullable = false)//columnDefinition = "char")
 	private String custname;
 	private String password;
 	private String city;
 	private String phone;
 
-	
 }
