@@ -3,7 +3,9 @@ package com.boot.demo.SpringBootDemo.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,8 +28,13 @@ public class Customer {
 	private String email;
 	@Column(name="name", nullable = false)//columnDefinition = "char")
 	private String custname;
+	//@Transient
 	private String password;
 	private String city;
 	private String phone;
+	
+	// bi-directional
+//	@OneToMany(mappedBy="customer")
+//	private Order order;
 
 }

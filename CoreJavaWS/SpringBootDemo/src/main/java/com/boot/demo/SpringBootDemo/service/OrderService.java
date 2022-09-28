@@ -34,11 +34,11 @@ public class OrderService {
 	@Transactional
 	public Integer insertOrder(List<CartItems> cartItems, String username)
 	{
-		Order order = new Order();
+		Order order = new Order(); // transient
 		Customer customer = customerRepository.findById(username).get();
 		order.setCustomer(customer);
 		order.setDate(java.sql.Date.valueOf(LocalDate.now()));
-		Order savedOrder = this.orderRepository.save(order);
+		Order savedOrder = this.orderRepository.save(order); // persistent
 		List<LineItem> items = new ArrayList<>();
 		for(CartItems cartitem : cartItems)
 		{

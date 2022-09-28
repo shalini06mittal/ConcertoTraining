@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 import com.boot.demo.SpringBootDemo.entity.Customer;
@@ -30,6 +31,25 @@ public class CustomerService {
 	
 	@Autowired
 	private CustomerPageAndSortRepository customerPageAndSortRepository;
+	
+	public List<Customer> getAllCustomersFiltered(Integer pageno, Integer size)
+	{
+		List<Customer> list = new ArrayList<>();
+		Pageable pageable = PageRequest.of(pageno, size);
+		
+		Page<Customer> pages =this.customerPageAndSortRepository.findAll(pageable);
+		
+		list = pages.getContent();
+		int totalpages = pages.getTotalPages();
+		int elementsOnEachPage = pages.getNumberOfElements();
+		long totalElements = pages.getTotalElements();
+		
+		System.out.println("Total pages "+totalpages);
+		System.out.println("Total elements "+totalElements);
+		System.out.println("Elements on a page "+elementsOnEachPage);
+		
+		return list;
+	}
 	
 	public List<Customer> getAllCustomers() {
 		ArrayList<Customer> list = new ArrayList<>();

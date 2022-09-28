@@ -29,6 +29,7 @@ public class LineItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	//private ProductLineItem primary;
 	private int qty;
 	@OneToOne
 	@JoinColumn(name="prodid", referencedColumnName = "pid")

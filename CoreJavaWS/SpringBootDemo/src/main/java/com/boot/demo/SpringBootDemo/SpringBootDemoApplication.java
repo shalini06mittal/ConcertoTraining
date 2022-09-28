@@ -62,7 +62,10 @@ public class SpringBootDemoApplication {
 		
 		System.out.println();
 //		System.out.println(cs.get("abc@test.com"));
-//		for(Customer c : cs.getAllCustomers())
+		for(Customer c : cs.getAllCustomersFiltered(1,10))
+			System.out.println(c);
+		System.out.println();
+//		for(Customer c : cs.getAllCustomersFiltered(0,5))
 //			System.out.println(c);
 //		
 //		try {
