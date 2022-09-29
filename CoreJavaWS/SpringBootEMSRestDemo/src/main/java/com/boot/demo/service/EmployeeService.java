@@ -26,12 +26,14 @@ public class EmployeeService {
 	@Transactional
 	public Employee insertEmployee(Employee employee) {
 		
-		Address savedAddress = this.addressRepository.save(employee.getAddress());
-		employee.setAddress(savedAddress);
 		Employee savedEmployee = this.employeeRepository.save(employee);
-		return savedEmployee;
-		
+		Address address = employee.getAddress();
+		address.setEmployee(savedEmployee);
+		Address savedAddress = this.addressRepository.save(address);
+		savedEmployee.setAddress(savedAddress);
+		return savedEmployee;	
 	}
+	
 	public Employee getEmplopyeeById(int eid) {
 		System.out.println("Emp service "+eid);
 		return this.employeeRepository
@@ -42,12 +44,13 @@ public class EmployeeService {
 		this.employeeRepository.findAll().forEach(employees::add);
 		return employees;
 	}
+	
 	public Employee updateEmployee(Employee employee) {
 		if(!this.employeeRepository.existsById(employee.getEid()))
 			throw new EntityNotFoundException("Employee "+employee.getEid()+" not found and cannot be updated");
-		return this.employeeRepository.save(employee);
-			
+		return this.employeeRepository.save(employee);		
 	}
+	
 	@Transactional
 	public boolean deleteEmployee(int eid) {
 		if(!this.employeeRepository.existsById(eid))

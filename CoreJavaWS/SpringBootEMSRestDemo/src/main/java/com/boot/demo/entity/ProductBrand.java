@@ -1,29 +1,28 @@
 package com.boot.demo.entity;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
+@Table(name="brand")
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@ToString
-@AllArgsConstructor
-public class Author {
+public class ProductBrand {
 
 	@Id
-	private int aid;
+	@Column(name="brandid")
+	private int bid;
+	@Column(name="brandname", length=80, nullable = false)
 	private String name;
-	@OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
-	Set<Book> books;
 }

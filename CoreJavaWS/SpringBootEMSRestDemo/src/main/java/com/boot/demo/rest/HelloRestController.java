@@ -1,8 +1,13 @@
 package com.boot.demo.rest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,11 +15,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.demo.entity.Author;
+import com.boot.demo.entity.Book;
+import com.boot.demo.repository.AuthorRepository;
+import com.boot.demo.repository.BookRepository;
 //SOAP (XML) vs REST (Architecture )
 	// Representational State Transfer
 	// webservice => REST API
@@ -45,6 +54,13 @@ import com.boot.demo.entity.Author;
 @RequestMapping("/rest")
 public class HelloRestController {
 
+	
+	@Autowired
+	private AuthorRepository repo;
+	
+	@Autowired
+	private BookRepository brepo;
+	
 	@GetMapping
 	public String getData()
 	{
@@ -58,10 +74,26 @@ public class HelloRestController {
 	//import org.springframework.http.MediaType;
 	@GetMapping(path = "/authors", 
 			produces = {MediaType.APPLICATION_JSON_VALUE})
+	@Transactional
 	public List<Author> getAuthorsData()
 	{
-		
-		return Arrays.asList(new Author(1, "JK Rowling"),new Author(2, "Syndney Sheldon"));
+		List<Author> authors = new ArrayList<>();
+		this.repo.findAll().forEach(author ->{
+			Hibernate.initialize(author.getBooks());
+			authors.add(author);
+		});
+		return authors;
+		//return Arrays.asList(new Author(1, "JK Rowling", null),new Author(2, "Syndney Sheldon",null));
+	}
+	
+	@GetMapping(path = "/books", 
+			produces = {MediaType.APPLICATION_JSON_VALUE})
+	public List<Book> getBooksData()
+	{
+		List<Book> books = new ArrayList<>();
+		this.brepo.findAll().forEach(books::add);
+		return books;
+		//return Arrays.asList(new Author(1, "JK Rowling", null),new Author(2, "Syndney Sheldon",null));
 	}
 	//http://localhost:8080/rest/20
 	// path parameter
@@ -78,9 +110,15 @@ public class HelloRestController {
 	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
-	public String postData()
+	public Author postData(@RequestBody Author author)
 	{
-		return "{\"message\":\"inserting data\"}";
+		System.out.println(author);
+		Author a1 = repo.save(author);
+//		for(Book book : author.getBooks()) {
+//			book.setAuthor(a1);
+//			brepo.save(book);
+//		}
+		return author;
 	}
 	@PutMapping
 	public String updateData()

@@ -33,6 +33,6 @@ public class Employee {
 	private String phone;
 	private String password;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "employee",cascade = {CascadeType.REMOVE})
 	private Address address;
 }

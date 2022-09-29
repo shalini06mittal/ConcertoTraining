@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -30,24 +31,10 @@ public class Address {
 	private String city;
 	private String country;
 	private String zipcode;
-	/**
-	 * {
-        "eid": 19,
-        "ename": "Emp 19",
-        "email": "emp19@test.com",
-        "phone": "19234567890",
-        "password": "emp19",
-        "address": {
-            "aid": 19,
-            "city": "some 19",
-            "country": "some 19",
-            "zipcode": "19234"
-        }
-    }
-	 */
 
 	@JsonIgnore
-	@OneToOne(mappedBy="address")
+	@OneToOne
+	@JoinColumn(name="empid")
 	private Employee employee;
 	@Override
 	public String toString() {
