@@ -7,6 +7,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.boot.demo.entity.Address;
@@ -19,21 +22,24 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
+
 	@Autowired
 	private AddressRepository addressRepository;
-	
+
 	@Transactional
 	public Employee insertEmployee(Employee employee) {
-		
+
 		Employee savedEmployee = this.employeeRepository.save(employee);
+
 		Address address = employee.getAddress();
-		address.setEmployee(savedEmployee);
-		Address savedAddress = this.addressRepository.save(address);
-		savedEmployee.setAddress(savedAddress);
+		if(address != null) {
+			address.setEmployee(savedEmployee);
+			Address savedAddress = this.addressRepository.save(address);
+			savedEmployee.setAddress(savedAddress);
+		}
 		return savedEmployee;	
 	}
-	
+
 	public Employee getEmplopyeeById(int eid) {
 		System.out.println("Emp service "+eid);
 		return this.employeeRepository
@@ -45,12 +51,21 @@ public class EmployeeService {
 		return employees;
 	}
 	
+	public Page<Employee> getFilteredEmployees(Integer pageno, Integer size){
+		
+		Pageable pageable = PageRequest.of(pageno, size);
+		
+		List<Employee> employees = new ArrayList<Employee>();
+		return this.employeeRepository.findAll(pageable);
+
+	}
+
 	public Employee updateEmployee(Employee employee) {
 		if(!this.employeeRepository.existsById(employee.getEid()))
 			throw new EntityNotFoundException("Employee "+employee.getEid()+" not found and cannot be updated");
 		return this.employeeRepository.save(employee);		
 	}
-	
+
 	@Transactional
 	public boolean deleteEmployee(int eid) {
 		if(!this.employeeRepository.existsById(eid))
