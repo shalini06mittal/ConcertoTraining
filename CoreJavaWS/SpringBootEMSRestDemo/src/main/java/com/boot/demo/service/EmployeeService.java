@@ -2,6 +2,7 @@ package com.boot.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.boot.demo.entity.Address;
 import com.boot.demo.entity.Employee;
+import com.boot.demo.exception.InvalidCredentialsException;
 import com.boot.demo.repository.AddressRepository;
 import com.boot.demo.repository.EmployeeRepository;
 
@@ -72,5 +74,24 @@ public class EmployeeService {
 			throw new EntityNotFoundException("Employee "+eid+" not found and cannot be deleted");
 		this.employeeRepository.deleteById(eid);
 		return true;
+	}
+	
+	public boolean loginEmployee(String email, String password) throws InvalidCredentialsException
+	{
+//		Optional<Employee> opt = this.employeeRepository.findByEmail(email);
+//		if(opt.isPresent())
+//		{
+//			Employee emp = opt.get();
+//			if(emp.getPassword().equals(password))
+//				return true;
+//		}
+		String pwd = this.employeeRepository.findByEmail(email);
+		if(pwd!=null)
+		{
+			//Employee emp = opt.get();
+			if(pwd.equals(password))
+				return true;
+		}
+		throw new InvalidCredentialsException("Invalid credentials, Please try again");
 	}
 }

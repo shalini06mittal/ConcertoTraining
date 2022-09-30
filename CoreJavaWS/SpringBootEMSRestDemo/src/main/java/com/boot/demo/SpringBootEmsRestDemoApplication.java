@@ -13,6 +13,7 @@ import com.boot.demo.entity.Address;
 import com.boot.demo.entity.Author;
 import com.boot.demo.entity.Book;
 import com.boot.demo.entity.Employee;
+import com.boot.demo.exception.InvalidCredentialsException;
 import com.boot.demo.repository.AuthorRepository;
 import com.boot.demo.repository.BookRepository;
 import com.boot.demo.service.EmployeeService;
@@ -74,6 +75,32 @@ public class SpringBootEmsRestDemoApplication {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	
+	
+	//@Bean
+	public void login()
+	{
+		try {
+			System.out.println(employeeService.loginEmployee("ayush@test.com", "ayush123"));
+		} catch (InvalidCredentialsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println();
+		try {
+			System.out.println(employeeService.loginEmployee("ayush@test.com", "ayush12"));
+		} catch (InvalidCredentialsException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		System.out.println();
+		try {
+			System.out.println(employeeService.loginEmployee("ayush@test.co", "ayush123"));
+		} catch (InvalidCredentialsException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+	}
 	
 	//@Bean
 	public void initialize()
