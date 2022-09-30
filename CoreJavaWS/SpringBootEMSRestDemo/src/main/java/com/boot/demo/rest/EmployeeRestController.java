@@ -27,6 +27,8 @@ import com.boot.demo.dto.Messages;
 import com.boot.demo.entity.Employee;
 import com.boot.demo.service.EmployeeService;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 @RestController
 @RequestMapping("/employees")
 public class EmployeeRestController {
@@ -41,6 +43,8 @@ public class EmployeeRestController {
 //		return this.employeeService.getEmployees();
 //	}
 	
+	@ApiResponse(description = "It returns the list of 5 employees by default"
+			)
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public Map<String, Object> mapgetAllEmployees(
 		@RequestParam(required = false, defaultValue = "0")	Integer pageno, 

@@ -67,6 +67,7 @@ public class HelloRestController {
 		return "{\"message\":\"fetching data\"}";
 	}
 	@GetMapping("/list")
+	
 	public List<String> getListData()
 	{	
 		return Arrays.asList("India","UK","USA");

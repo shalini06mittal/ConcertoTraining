@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -24,14 +25,29 @@ import com.boot.demo.service.EmployeeService;
 @SpringBootApplication
 public class SpringBootEmsRestDemoApplication {
 
+	
+	@Value("${message}")
+	private String message;
+	
+	
+	@Bean
+	public void message()
+	{
+		System.out.println("\n#################################################\n");
+		System.out.println(message);
+		System.out.println("\n#################################################\n");
+	}
+	
 	public static void main(String[] args) {
 		ApplicationContext context =
 				SpringApplication.run(SpringBootEmsRestDemoApplication.class, args);
-
+		
+		
 		AuthorRepository arepo = context.getBean(AuthorRepository.class);
 		BookRepository brepo = context.getBean(BookRepository.class);
 
 		Author a1 = new Author();
+		
 		a1.setName("JK Rowling");
 		a1.setAid(1);
 
@@ -75,7 +91,7 @@ public class SpringBootEmsRestDemoApplication {
 		//		s.insertEmployee(e1);
 		//		s.deleteEmployee(24);
 	}
-
+	
 	@SuppressWarnings("deprecation")
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {

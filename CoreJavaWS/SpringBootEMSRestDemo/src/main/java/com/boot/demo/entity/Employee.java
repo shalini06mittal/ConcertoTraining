@@ -2,14 +2,14 @@ package com.boot.demo.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.context.annotation.Description;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,10 +27,12 @@ public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotNull
 	private int eid;
 	private String ename;
 	private String email;
 	private String phone;
+	@Size(min = 8, max=15)
 	private String password;
 	
 	@OneToOne(mappedBy = "employee",
