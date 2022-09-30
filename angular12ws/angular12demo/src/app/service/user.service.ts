@@ -6,12 +6,13 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
-  url:string ="http://localhost:3000/users?username=";
-
+  //url:string ="http://localhost:3000/users?username=";
+  url:string ="http://localhost:8080/";
   constructor(private http:HttpClient) { }
    
   loginUser(username:string, password:string){
-      return this.http.get<any[]>(this.url+username);
+    let emp ={username, password}
+      return this.http.post<any>(this.url+"login", emp);
   }
 
   isAuthencticated():boolean{

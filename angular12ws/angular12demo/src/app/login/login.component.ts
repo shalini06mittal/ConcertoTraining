@@ -23,17 +23,27 @@ export class LoginComponent implements OnInit {
    */
   public onSubmit(): void {
     this.loginValid = true;
+    console.log('login')
     this.userserv.loginUser(this.username, this.password)
     .subscribe(resp => {
-      console.log(resp[0])
-      if(resp[0] !== undefined && resp[0].username === this.username && resp[0].password === this.password)
+      console.log('response')
+      console.log(resp.message)
+      // if(resp[0] !== undefined && resp[0].username === this.username && resp[0].password === this.password)
+      // {
+      //   localStorage.setItem("username",this.username);
+      //   this.router.navigate(['/employees']);
+      // }
+      // else{
+      //   this.loginValid = false;
+      // }
+      if(resp !== undefined && resp.message === "SUCCESS")
       {
         localStorage.setItem("username",this.username);
         this.router.navigate(['/employees']);
       }
-      else{
-        this.loginValid = false;
-      }
+    },error=>{
+      console.log('failed')
+      this.loginValid = false;
     })
   }
 

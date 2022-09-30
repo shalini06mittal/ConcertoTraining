@@ -8,6 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.boot.demo.entity.Address;
 import com.boot.demo.entity.Author;
@@ -23,20 +26,20 @@ public class SpringBootEmsRestDemoApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext context =
-		SpringApplication.run(SpringBootEmsRestDemoApplication.class, args);
-		
+				SpringApplication.run(SpringBootEmsRestDemoApplication.class, args);
+
 		AuthorRepository arepo = context.getBean(AuthorRepository.class);
 		BookRepository brepo = context.getBean(BookRepository.class);
-		
+
 		Author a1 = new Author();
 		a1.setName("JK Rowling");
 		a1.setAid(1);
-		
+
 		Book b1 = new Book();
 		b1.setTitle("Harry Potter and stone");
 		b1.setYear(2010);
 		b1.setAuthor(a1);
-		
+
 		Book b2 = new Book();
 		b2.setTitle("Harry Potter and chambers");
 		b2.setYear(2010);
@@ -45,38 +48,50 @@ public class SpringBootEmsRestDemoApplication {
 		Set<Book> books = new HashSet<>();
 		books.add(b1);
 		books.add(b2);
-		
+
 		a1.setBooks(books);
 		b1.setBookid(1);
-		
+
 		//arepo.deleteById(3);
-//		arepo.save(a1);
-//		brepo.save(b1);
-//		brepo.deleteById(11);
-		
-		
-		
-//		EmployeeService s = context.getBean(EmployeeService.class);
-//		Employee e1 = new Employee();
-//		//e1.setEid(26);
-//		e1.setEname("Ayush");
-//		e1.setEmail("ayush@test.com");
-//		e1.setPassword("ayush123");
-//		e1.setPhone("3434343456");
-//		Address a1 = new Address();
-//		//a1.setAid(24);
-//		a1.setCity("London");
-//		a1.setCountry("UK");
-//		a1.setZipcode("432121");
-//		e1.setAddress(a1);
-//		s.insertEmployee(e1);
-//		s.deleteEmployee(24);
+		//		arepo.save(a1);
+		//		brepo.save(b1);
+		//		brepo.deleteById(11);
+
+
+
+		//		EmployeeService s = context.getBean(EmployeeService.class);
+		//		Employee e1 = new Employee();
+		//		//e1.setEid(26);
+		//		e1.setEname("Ayush");
+		//		e1.setEmail("ayush@test.com");
+		//		e1.setPassword("ayush123");
+		//		e1.setPhone("3434343456");
+		//		Address a1 = new Address();
+		//		//a1.setAid(24);
+		//		a1.setCity("London");
+		//		a1.setCountry("UK");
+		//		a1.setZipcode("432121");
+		//		e1.setAddress(a1);
+		//		s.insertEmployee(e1);
+		//		s.deleteEmployee(24);
 	}
-	
+
+	@SuppressWarnings("deprecation")
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+				.allowedMethods("*")
+				.allowedOrigins("http://localhost:4200");
+			}
+		};
+	}
 	@Autowired
 	private EmployeeService employeeService;
-	
-	
+
+
 	//@Bean
 	public void login()
 	{
@@ -101,11 +116,11 @@ public class SpringBootEmsRestDemoApplication {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	//@Bean
 	public void initialize()
 	{
-		
+
 		Employee emp = new Employee();
 		emp.setEname("Shalini");
 		emp.setEmail("shalini@test.com");
@@ -146,8 +161,8 @@ public class SpringBootEmsRestDemoApplication {
 			e1.setAddress(a1);
 			employeeService.insertEmployee(e1);
 		}
-		
-		
+
+
 	}
 
 }
