@@ -6,7 +6,7 @@
     <ng-template class="container" #none>
         <h1>No items to display</h1>
     </ng-template > -->
-    {{selid}}
+    <!-- {{selid}} -->
     <div *ngIf="employees.length > 0">
         <div *ngFor="let emp of employees" [@simpleFadeAnimation]="'in'">
             <app-employee [employee]="emp">
