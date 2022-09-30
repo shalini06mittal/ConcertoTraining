@@ -100,7 +100,11 @@ export class EmployeesComponent implements  OnChanges, OnInit {
     //this.route.params.subscribe(params => this.selid = params.id)
     this.route.queryParams.subscribe(params => this.selid = parseInt(params.id))
     this.empservice.getAllEmployees()
-    .subscribe(data => this.employees = data)
+    .subscribe(resp => {
+     console.log('fetched employees')
+     console.log(resp);
+      this.employees = resp.employees
+    })
   }
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.newemp)

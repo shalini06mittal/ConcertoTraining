@@ -12,9 +12,9 @@ export class EmphttpService {
 
   constructor(private http:HttpClient) { }
 
-  getAllEmployees():Observable<Employee[]>
+  getAllEmployees():Observable<any>
   {
-    return this.http.get<Employee[]>(this.url);
+    return this.http.get<any>(this.url);
   }
   getEmployeeById(eid:number):Observable<Employee>
   {
