@@ -28,9 +28,11 @@ public class SpringBootSecurityDemoApplication {
 	{
 		loginUserRepo.save(new LoginUser("user1", encoder.encode("user1"), "USER"));
 		loginUserRepo.save(new LoginUser("user2",  encoder.encode("user2"), "USER"));
-		loginUserRepo.save(new LoginUser("user3",  encoder.encode("user2"), "USER"));
+		loginUserRepo.save(new LoginUser("user3",  encoder.encode("user3"), "USER"));
+		loginUserRepo.save(new LoginUser("user4",  encoder.encode("user4"), "USER"));
 		loginUserRepo.save(new LoginUser("admin",  encoder.encode("admin123"), "ADMIN"));
 	}
+	
 	
 	
 	
