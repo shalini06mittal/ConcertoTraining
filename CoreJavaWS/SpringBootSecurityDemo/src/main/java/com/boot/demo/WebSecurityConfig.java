@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.boot.demo.service.LoginUserDetailsService;
 
@@ -45,12 +46,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 //		http.authorizeRequests().antMatchers("/").permitAll()
 //		.anyRequest().authenticated().and().formLogin().and().logout();
 		
+//		http.authorizeRequests().antMatchers("/").permitAll()
+//		.antMatchers("/user/**","/dashboard").hasAnyAuthority("ADMIN","USER")
+//		.antMatchers("/admin").hasAnyAuthority("ADMIN")
+//		.anyRequest().authenticated().and().formLogin().and().logout();
+		
 		http.authorizeRequests().antMatchers("/").permitAll()
 		.antMatchers("/user/**","/dashboard").hasAnyAuthority("ADMIN","USER")
 		.antMatchers("/admin").hasAnyAuthority("ADMIN")
-		.anyRequest().authenticated().and().formLogin().and().logout();
+		.anyRequest().authenticated().and().httpBasic().and().logout();
+		
+		
 	}
-	
 	
 	@Bean
 	public PasswordEncoder encoder()
