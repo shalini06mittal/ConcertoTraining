@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-03T03:47:19.741522Z</date>
+  <millis>1664768839741</millis>
+  <nanos>522000</nanos>
+  <sequence>0</sequence>
+  <logger>com.demo.LoggerDemo.App</logger>
+  <level>SEVERE</level>
+  <class>com.demo.LoggerDemo.App</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>contact admin</message>
+</record>
+<record>
+  <date>2022-10-03T03:47:19.828522Z</date>
+  <millis>1664768839828</millis>
+  <nanos>522000</nanos>
+  <sequence>1</sequence>
+  <logger>com.demo.LoggerDemo.App</logger>
+  <level>WARNING</level>
+  <class>com.demo.LoggerDemo.App</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>Do not do this</message>
+</record>
+</log>

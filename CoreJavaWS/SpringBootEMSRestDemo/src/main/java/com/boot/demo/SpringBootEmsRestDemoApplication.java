@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -29,19 +30,24 @@ public class SpringBootEmsRestDemoApplication {
 	@Value("${message}")
 	private String message;
 	
-	
 	@Bean
 	public void message()
 	{
+		System.out.println(env.getProperty("message"));
 		System.out.println("\n#################################################\n");
 		System.out.println(message);
 		System.out.println("\n#################################################\n");
 	}
 	
+	@Autowired
+	private Environment env;
+	
 	public static void main(String[] args) {
 		ApplicationContext context =
 				SpringApplication.run(SpringBootEmsRestDemoApplication.class, args);
 		
+		System.out.println("environment");
+		System.out.println(context.getEnvironment().getProperty("message"));
 		
 		AuthorRepository arepo = context.getBean(AuthorRepository.class);
 		BookRepository brepo = context.getBean(BookRepository.class);
