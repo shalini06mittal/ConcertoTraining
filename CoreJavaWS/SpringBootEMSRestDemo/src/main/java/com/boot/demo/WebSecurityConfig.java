@@ -19,7 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import com.boot.demo.entity.LoginUser;
 import com.boot.demo.filter.JwtFilter;
+import com.boot.demo.repository.LoginUserRepo;
 import com.boot.demo.service.LoginUserDetailsService;
 
 // https://www.baeldung.com/spring-deprecated-websecurityconfigureradapter
@@ -29,17 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	private LoginUserDetailsService loginUserDetailsService;
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		System.out.println("authentication...");
-//		auth.inMemoryAuthentication()
-//		.withUser("user1").password(encoder().encode("user1")).roles("USER")
-//		.and()
-//		.withUser("user2").password(encoder().encode("user2")).roles("USER")
-//		.and()
-//		.withUser("admin").password(encoder().encode("admin")).roles("ADMIN");
-		
 		auth.userDetailsService(loginUserDetailsService);
 	}
 	@Bean
@@ -47,55 +42,44 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	{
 		return super.authenticationManagerBean();
 	}
-	
+
 	@Autowired
 	private JwtFilter jwtfilter;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
+
 		// for JWT authentication
-				http.csrf().disable()
-				.authorizeRequests().antMatchers("/","/auth").permitAll()
-				.antMatchers("/user/**","/dashboard").hasAnyAuthority("ADMIN","USER")
-				.antMatchers("/admin").hasAnyAuthority("ADMIN")
-				.anyRequest().authenticated()
-				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-				
-				http.addFilterBefore(jwtfilter, UsernamePasswordAuthenticationFilter.class);
-		
-		// to bypass spring security and permit request to all url
-		//http.authorizeHttpRequests().anyRequest().permitAll();
-		
-		// to permit request to / and login , logout but authenticate
-		// all other urls
-//		http.authorizeRequests().antMatchers("/").permitAll()
-//		.anyRequest().authenticated().and().formLogin().and().logout();
-		
-//		http.authorizeRequests().antMatchers("/").permitAll()
-//		.antMatchers("/user/**","/dashboard").hasAnyAuthority("ADMIN","USER")
-//		.antMatchers("/admin").hasAnyAuthority("ADMIN")
-//		.anyRequest().authenticated().and().formLogin().and().logout();
-		
-//		http.authorizeRequests().antMatchers("/").permitAll()
-//		.antMatchers("/user/**","/dashboard").hasAnyAuthority("ADMIN","USER")
-//		.antMatchers("/admin").hasAnyAuthority("ADMIN")
-//		.anyRequest().authenticated().and().httpBasic().and().logout();
-		
-		
+		http.csrf().disable()
+		.authorizeRequests().antMatchers("/","/auth","/rest/**").permitAll()
+		.antMatchers("/employees/**").hasAnyAuthority("ADMIN","USER")
+		//.antMatchers("/admin").hasAnyAuthority("ADMIN")
+		.anyRequest().authenticated()
+		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+		http.addFilterBefore(jwtfilter, UsernamePasswordAuthenticationFilter.class);
 	}
-	
-	
-	
+
 	@Bean
 	public PasswordEncoder encoder()
 	{
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/h2-console/**");
+	}
+	@Autowired
+	private LoginUserRepo loginUserRepo;
+	//@Bean
+	public void initialize1()
+	{
+		loginUserRepo.save(new LoginUser("user1", encoder().encode("user1"), "USER"));
+		loginUserRepo.save(new LoginUser("user2",  encoder().encode("user2"), "USER"));
+		loginUserRepo.save(new LoginUser("user3",  encoder().encode("user3"), "USER"));
+		
+		
 	}
 }
 

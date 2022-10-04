@@ -12,7 +12,7 @@ export class UserService {
    
   loginUser(username:string, password:string){
     let emp ={username, password}
-      return this.http.post<any>(this.url+"login", emp);
+      return this.http.post<any>(this.url+"auth", emp);
   }
 
   isAuthencticated():boolean{

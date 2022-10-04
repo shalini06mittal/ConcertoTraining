@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -18,9 +19,11 @@ import com.boot.demo.entity.Address;
 import com.boot.demo.entity.Author;
 import com.boot.demo.entity.Book;
 import com.boot.demo.entity.Employee;
+import com.boot.demo.entity.LoginUser;
 import com.boot.demo.exception.InvalidCredentialsException;
 import com.boot.demo.repository.AuthorRepository;
 import com.boot.demo.repository.BookRepository;
+import com.boot.demo.repository.LoginUserRepo;
 import com.boot.demo.service.EmployeeService;
 
 @SpringBootApplication
@@ -186,5 +189,21 @@ public class SpringBootEmsRestDemoApplication {
 
 
 	}
+	@Autowired
+	private LoginUserRepo loginUserRepo;
+	
+//	
+//	@Autowired
+//	private PasswordEncoder encoder;
+	
+//	@Bean
+//	public void initialize1()
+//	{
+//		loginUserRepo.save(new LoginUser("user1", encoder.encode("user1"), "USER"));
+//		loginUserRepo.save(new LoginUser("user2",  encoder.encode("user2"), "USER"));
+//		loginUserRepo.save(new LoginUser("user3",  encoder.encode("user3"), "USER"));
+//		loginUserRepo.save(new LoginUser("user4",  encoder.encode("user4"), "USER"));
+//		loginUserRepo.save(new LoginUser("admin",  encoder.encode("admin123"), "ADMIN"));
+//	}
 
 }
