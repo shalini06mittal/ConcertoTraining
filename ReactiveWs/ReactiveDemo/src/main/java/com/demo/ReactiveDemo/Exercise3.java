@@ -1,6 +1,8 @@
 package com.demo.ReactiveDemo;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Exercise3 {
 
@@ -12,8 +14,13 @@ public class Exercise3 {
         // into a List and print the list and its size
         // TODO: Write code here
 
-
-        System.out.println("Press a key to end");
+    	List<Integer> list =
+    	ReactiveSources.intNumbersFlux().toStream()
+    	.map(d->d*d)
+    	.collect(Collectors.toList());
+        
+    	System.out.println(list);
+    	System.out.println("Press a key to end");
         System.in.read();
     }
 

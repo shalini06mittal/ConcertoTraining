@@ -30,4 +30,10 @@ public class CustomerController {
     public Flux<Customer> getAllCustomersStream() {
         return service.loadAllCustomersStream();
     }
+    
+ // MediaType.TEXT_EVENT_STREAM_VALUE - if you do not use this it will not stream the data one by one
+    @GetMapping(value = "/stream1")
+    public Flux<Customer> getAllCustomersStream1() {
+        return service.loadAllCustomersStream();
+    }
 }
