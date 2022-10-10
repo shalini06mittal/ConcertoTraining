@@ -28,9 +28,9 @@ import com.example.demo.entity.User;
 
 import lombok.AllArgsConstructor;
 
-//@Configuration
-//@EnableBatchProcessing
-//@AllArgsConstructor
+@Configuration
+@EnableBatchProcessing
+@AllArgsConstructor
 public class SpringBatchConfigException {
 
     private JobBuilderFactory jobBuilderFactory;
@@ -115,6 +115,10 @@ public class SpringBatchConfigException {
                 .reader(reader())
                 .processor(processor())
                 .writer(writer())
+                .faultTolerant()
+                
+                .skipLimit(2)
+                .skip(FlatFileParseException.class)
                 .build();
     }
     
@@ -122,7 +126,8 @@ public class SpringBatchConfigException {
     @Bean
     public Job runJob() {
         return jobBuilderFactory.get("importCustomers")
-                .flow(step1()).end().build();
+                .flow(step1())
+                .end().build();
 
     }
 

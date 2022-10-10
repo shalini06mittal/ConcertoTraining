@@ -8,7 +8,12 @@ import org.springframework.batch.item.ExecutionContext;
 
 public class RangePartition implements Partitioner{
 
-    
+    /**
+     * min  1
+     * max 1000
+     * grid = 2, 500
+     * grid=4, 
+     */
     @Override
     public Map<String, ExecutionContext> partition(int gridSize) {//2
        

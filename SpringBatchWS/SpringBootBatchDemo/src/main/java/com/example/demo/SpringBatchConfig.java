@@ -21,14 +21,15 @@ import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 
 import com.example.demo.entity.Customer;
+import com.example.demo.listener.CustomerJobExecutionListener;
 import com.example.demo.processor.CustomerProcessor;
 import com.example.demo.repo.CustomerRepository;
 
 import lombok.AllArgsConstructor;
-
-@Configuration
-@EnableBatchProcessing
-@AllArgsConstructor
+//
+//@Configuration
+//@EnableBatchProcessing
+//@AllArgsConstructor
 public class SpringBatchConfig {
 
 	private JobBuilderFactory jobBuilderFactory;
@@ -37,6 +38,7 @@ public class SpringBatchConfig {
 	
 	private CustomerRepository customerRepository;
 	
+	private CustomerJobExecutionListener listener;
 	@Bean
 	public FlatFileItemReader<Customer> reader()
 	{
@@ -91,8 +93,10 @@ public class SpringBatchConfig {
 	@Bean
 	public Job createJob()
 	{
-		return jobBuilderFactory.get("saveCustomers").flow(step1())
-
+		return jobBuilderFactory.get("saveCustomers")
+				.listener(listener)
+				.flow(step1())
+				
 				.end().build();
 	}
 	

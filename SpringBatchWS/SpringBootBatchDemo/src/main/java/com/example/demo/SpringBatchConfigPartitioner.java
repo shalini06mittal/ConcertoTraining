@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.partition.PartitionHandler;
@@ -15,6 +16,7 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.task.TaskExecutor;
@@ -24,6 +26,8 @@ import com.example.demo.entity.Customer;
 import com.example.demo.partition.RangePartition;
 import com.example.demo.processor.CustomerProcessor;
 import com.example.demo.writer.CustomerWriter;
+
+import lombok.AllArgsConstructor;
 
 //@Configuration
 //@EnableBatchProcessing
@@ -85,9 +89,32 @@ public class SpringBatchConfigPartitioner {
     public CustomerProcessor processor() {
         return new CustomerProcessor();
     }
+    
+    @Bean
+    public RangePartition partition()
+    {
+    	return new RangePartition();
+    }
+    
+    @Bean
+    public PartitionHandler partitionHandler()
+    {
+        TaskExecutorPartitionHandler taskExecutorPartitionHandler = new TaskExecutorPartitionHandler();
+        taskExecutorPartitionHandler.setGridSize(4);
+        taskExecutorPartitionHandler.setTaskExecutor(taskExecutor());
+        taskExecutorPartitionHandler.setStep(slaveStep());
+        return taskExecutorPartitionHandler;
+    }
    
     @Bean
-    public Step step1() {
+    public Step masterStep() {
+        return stepBuilderFactory.get("master-csv-step")
+                .partitioner(slaveStep().getName(), partition())
+                .partitionHandler(partitionHandler())
+                .build();
+    }
+    @Bean
+    public Step slaveStep() {
         return stepBuilderFactory.get("csv-step").<Customer, Customer>chunk(100)
                 .reader(reader())
                 .processor(processor())
@@ -95,19 +122,24 @@ public class SpringBatchConfigPartitioner {
                 .writer(customerWriter)
                 .build();
     }
+   
     
     
     @Bean
     public Job runJob() {
         return jobBuilderFactory.get("importCustomers")
-                .flow(step1()).end().build();
+        		
+                .flow(masterStep()).end().build();
 
     }
 
     @Bean
     public TaskExecutor taskExecutor() {
-       
-        return null;
+       ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+       executor.setMaxPoolSize(4);
+       executor.setQueueCapacity(4);
+       executor.setCorePoolSize(4);
+       return executor;
     }
 
 }

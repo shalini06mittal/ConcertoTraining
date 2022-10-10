@@ -24,6 +24,7 @@ public class JobControlller {
 	@GetMapping("/batch")
 	public String process()
 	{
+		
 		JobParameters parameters = new JobParametersBuilder()
 				.addLong("start", (long)System.currentTimeMillis()).toJobParameters();
 		

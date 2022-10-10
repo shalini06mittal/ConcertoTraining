@@ -9,7 +9,7 @@ public class SpringBootBatchDemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootBatchDemoApplication.class, args);
-		
+		System.out.println(Runtime.getRuntime().availableProcessors());
 	}
 	@Bean
 	public void data()
