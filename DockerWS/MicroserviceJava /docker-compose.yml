@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  discovery:
+    image: eureka
+    container_name: eureka
+    build: ./EurekaServerDemo
+    ports:
+      - 8761:8761
+
+  productservice:                        #it is just a name, which will be used only in this file.
+      image: product-service               #name of the image after dockerfile executes
+      container_name: product-service-app  #name of the container created from docker image
+      build:
+        context: ./ProductMicroservice                         #docker file path (. means root directory)
+        dockerfile: Dockerfile              #docker file name
+      environment:
+        - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/
+      ports:
+        - "8081:8081"                       #docker containter port with your os port
+      depends_on:                           #define dependencies of this app
+        - discovery                                #dependency name (which is defined with this name 'db' in this file earlier)
