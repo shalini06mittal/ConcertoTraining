@@ -32,6 +32,7 @@ import { ObservablesComponent } from './observables/observables.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileinfoComponent } from './profileinfo/profileinfo.component';
 import { TokenService } from './service/token.service';
+import { PdfComponent } from './pdf/pdf.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { TokenService } from './service/token.service';
     LoginComponent,
     ObservablesComponent,
     ProfileComponent,
-    ProfileinfoComponent
+    ProfileinfoComponent,
+    PdfComponent
   ],
   imports: [
     BrowserModule, ReactiveFormsModule,

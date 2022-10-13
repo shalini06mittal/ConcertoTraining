@@ -31,6 +31,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @RequestMapping("/employees")
+@CrossOrigin
 public class EmployeeRestController {
 
 	@Autowired

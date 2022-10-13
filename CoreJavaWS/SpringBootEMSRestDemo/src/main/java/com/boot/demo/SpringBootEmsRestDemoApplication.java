@@ -101,18 +101,19 @@ public class SpringBootEmsRestDemoApplication {
 		//		s.deleteEmployee(24);
 	}
 	
-	@SuppressWarnings("deprecation")
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**")
-				.allowedMethods("*")
-				.allowedOrigins("http://localhost:4200");
-			}
-		};
-	}
+//	@SuppressWarnings("deprecation")
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//		System.out.println("cors");
+//		return new WebMvcConfigurerAdapter() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/**")
+//				.allowedMethods("*")
+//				.allowedOrigins("http://localhost:4200");
+//			}
+//		};
+//	}
 	@Autowired
 	private EmployeeService employeeService;
 

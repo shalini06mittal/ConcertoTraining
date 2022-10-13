@@ -10,8 +10,8 @@ import { UserService } from '../service/user.service';
 export class LoginComponent implements OnInit {
 
   public loginValid = true;
-  public username = 'abc';
-  public password = 'abc123';
+  public username = 'user1';
+  public password = 'user1';
 
   constructor(private userserv : UserService, private router:Router) { }
 
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     this.userserv.loginUser(this.username, this.password)
     .subscribe(resp => {
       console.log('response')
-      console.log(resp.message)
+      console.log(resp.jwt)
       // if(resp[0] !== undefined && resp[0].username === this.username && resp[0].password === this.password)
       // {
       //   localStorage.setItem("username",this.username);
@@ -36,9 +36,9 @@ export class LoginComponent implements OnInit {
       // else{
       //   this.loginValid = false;
       // }
-      if(resp !== undefined && resp.message === "SUCCESS")
+      if(resp !== undefined )
       {
-        localStorage.setItem("username",this.username);
+        localStorage.setItem("token",resp.jwt);
         this.router.navigate(['/employees']);
       }
     },error=>{

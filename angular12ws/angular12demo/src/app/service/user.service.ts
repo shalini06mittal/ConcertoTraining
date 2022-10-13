@@ -16,9 +16,9 @@ export class UserService {
   }
 
   isAuthencticated():boolean{
-    return !!localStorage.getItem("username");
+    return !!localStorage.getItem("token");
   }
   logout(){
-    localStorage.removeItem("username");
+    localStorage.removeItem("token");
   } 
 }
