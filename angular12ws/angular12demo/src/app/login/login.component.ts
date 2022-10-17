@@ -28,14 +28,6 @@ export class LoginComponent implements OnInit {
     .subscribe(resp => {
       console.log('response')
       console.log(resp.jwt)
-      // if(resp[0] !== undefined && resp[0].username === this.username && resp[0].password === this.password)
-      // {
-      //   localStorage.setItem("username",this.username);
-      //   this.router.navigate(['/employees']);
-      // }
-      // else{
-      //   this.loginValid = false;
-      // }
       if(resp !== undefined )
       {
         localStorage.setItem("token",resp.jwt);
@@ -48,3 +40,11 @@ export class LoginComponent implements OnInit {
   }
 
 }
+ // if(resp[0] !== undefined && resp[0].username === this.username && resp[0].password === this.password)
+      // {
+      //   localStorage.setItem("username",this.username);
+      //   this.router.navigate(['/employees']);
+      // }
+      // else{
+      //   this.loginValid = false;
+      // }
